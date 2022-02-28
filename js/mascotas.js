@@ -9,7 +9,7 @@ const btnClose = document.getElementById("btnClose");
 const indice = document.getElementById("indice");
 const modal = document.getElementById("exampleModal");
 
-let mascotas = [
+var mascotas = [
   {
     tipo: "Gato",
     nombre: "Michifus",
@@ -37,6 +37,7 @@ function listarMascotas() {
         </div>
     </td>
 </tr>`
+
     )
     .join("");
   listaMascotas.innerHTML = htmlMascotas;
@@ -68,7 +69,7 @@ function enviarDatos(evento) {
 function editar(index) {
   return function cuandoCliqueo() {
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-      keyboard: true,
+      keyboard: false,
       })
     btnGuardar.innerHTML = "Editar";
     myModal.toggle();
@@ -101,5 +102,5 @@ listarMascotas();
 formData.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
 btnCerrar.onclick = resetModal;
-modal.onclick = resetModal;
+// modal.onclick = resetModal;
 btnClose.onclick = resetModal;
