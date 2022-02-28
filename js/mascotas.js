@@ -7,6 +7,7 @@ const btnCreate = document.getElementById("btn-create");
 const btnClose = document.getElementById("btn-close");
 const iconClose = document.getElementById("icon-close");
 const index = document.getElementById("modalIndex");
+const modalLabel = document.getElementById("exampleModalLabel");
 
 
 var pets = [
@@ -79,6 +80,7 @@ function edit(index) {
       keyboard: false,
       })
     btnCreate.innerHTML = "Editar";
+    modalLabel.innerHTML = "Editar Mascota";
     myModal.toggle();
     const pet = pets[index];
     petName.value = pet.petName;
