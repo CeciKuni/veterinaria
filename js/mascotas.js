@@ -42,7 +42,7 @@ function listPets() {
     .join("");
   petList.innerHTML = htmlPets;
   Array.from(document.getElementsByClassName('edit')).forEach((editButton, index) => editButton.onclick = edit(index));
-  Array.from(document.getElementsByClassName('delete')).forEach((deleteButton, index) => deleteButton.onclick = delete(index));
+  Array.from(document.getElementsByClassName('delete')).forEach((deleteButton, index) => deleteButton.onclick = deletePet(index));
 }
 
 function sendData(event) {
