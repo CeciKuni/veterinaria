@@ -1,72 +1,72 @@
-const listaMascotas = document.getElementById("lista-mascotas");
-const tipo = document.getElementById("tipo");
-const nombre = document.getElementById("nombre");
-const dueno = document.getElementById("dueno");
+const petList = document.getElementById("pet-list");
+const petType = document.getElementById("petType");
+const petName = document.getElementById("petName");
+const client = document.getElementById("client");
 const formData = document.getElementById("formData");
-const btnGuardar = document.getElementById("btn-guardar");
-const btnCerrar = document.getElementById("btn-cerrar");
-const btnClose = document.getElementById("btnClose");
-const indice = document.getElementById("indice");
-const modal = document.getElementById("exampleModal");
+const btnSave = document.getElementById("btn-save");
+const btnClose = document.getElementById("btn-close");
+const iconClose = document.getElementById("icon-close");
+const index = document.getElementById("modalIndex");
 
-var mascotas = [
+
+var pets = [
   {
-    tipo: "Gato",
-    nombre: "Michifus",
-    dueno: "Manuel",
+    petType: "Gato",
+    petName: "Michifus",
+    client: "Manuel",
   },
   {
-    tipo: "Perro",
-    nombre: "Firulais",
-    dueno: "El Washi",
+    petType: "Perro",
+    petName: "Firulais",
+    client: "Ricardo",
   },
 ];
 
-function listarMascotas() {
-  const htmlMascotas = mascotas
+function listPets() {
+  const htmlPets = pets
     .map(
-      (mascota, index) => `<tr>
+      (pet, index) => `<tr>
     <th scope="row">${index}</th>
-    <td>${mascota.tipo}</td>
-    <td>${mascota.nombre}</td>
-    <td>${mascota.dueno}</td>
+    <td>${pet.petType}</td>
+    <td>${pet.petName}</td>
+    <td>${pet.client}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary editar"><i class="fa-regular fa-pen-to-square"></i></button>
-            <button type="button" class="btn btn-danger eliminar"><i class="fa-solid fa-trash-can"></i></button>
+            <button type="button" class="btn btn-primary edit"><i class="fa-regular fa-pen-to-square"></i></button>
+            <button type="button" class="btn btn-danger delete"><i class="fa-solid fa-trash-can"></i></button>
         </div>
     </td>
 </tr>`
 
     )
     .join("");
-  listaMascotas.innerHTML = htmlMascotas;
-  Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
-  Array.from(document.getElementsByClassName("eliminar")).forEach((botonEliminar, index) => botonEliminar.onclick = eliminar(index));
+  petList.innerHTML = htmlPets;
+  Array.from(document.getElementsByClassName('edit')).forEach((editButton, index) => editButton.onclick = edit(index));
+  Array.from(document.getElementsByClassName('delete')).forEach((deleteButton, index) => deleteButton.onclick = delete(index));
 }
 
-function enviarDatos(evento) {
-  evento.preventDefault();
-  const datos = {
-    tipo: tipo.value,
-    nombre: nombre.value,
-    dueno: dueno.value,
+function sendData(event) {
+  event.preventDefault();
+  const data = {
+    petType: petType.value,
+    petName: petName.value,
+    client: client.value,
   };
-  const accion = btnGuardar.innerHTML;
-  switch (accion) {
-    case "Editar":
-      mascotas[indice.value] = datos;
+  const action = btnSave.innerHTML;
+  switch (action) {
+    case "Edit":
+      pets[modalIndex.value] = data;
       break;
     default:
-      mascotas.push(datos);
+      pets.push(data);
       break;
   }
 
-  listarMascotas();
+  listPets();
   resetModal();
 }
 
-function editar(index) {
+function edit(index) {
   let scopeFocus = document.getElementById('buttonNew')
   scopeFocus.addEventListener("click",() => {
     resetModal();
@@ -75,36 +75,33 @@ function editar(index) {
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
       keyboard: false,
       })
-    btnGuardar.innerHTML = "Editar";
+    btnSave.innerHTML = "Editar";
     myModal.toggle();
-    const mascota = mascotas[index];
-    nombre.value = mascota.nombre;
-    dueno.value = mascota.dueno;
-    tipo.value = mascota.tipo;
-    indice.value = index;
+    const pet = pets[index];
+    petName.value = pet.petName;
+    client.value = pet.client;
+    petType.value = pet.petType;
+    modalIndex.value = index;
   }
 }
 
 function resetModal() {
-  nombre.value = '';
-  dueno.value = 'Dueno';
-  tipo.value = 'Tipo de Animal';
-  indice.value = '';
-  btnGuardar.innerHTML = "Guardar";
+  petName.value = '';
+  client.value = 'Cliente';
+  petType.value = 'Tipo de Animal';
+  modalIndex.value = '';
+  btnSave.innerHTML = "Guardar";
 }
 
-function eliminar(index) {
-  return function clickEnEliminar() {
-      mascotas = mascotas.filter((mascota, indiceMascota)=>indiceMascota !== index);
-      listarMascotas();
+function deletePet(index) {
+  return function deleteData() {
+      pets = pets.filter((pet, petIndex)=>petIndex !== index);
+      listPets();
 
   }
 }
 
-listarMascotas();
+listPets();
 
-formData.onsubmit = enviarDatos;
-btnGuardar.onclick = enviarDatos;
-btnCerrar.onclick = resetModal;
-// modal.onclick = resetModal;
-btnClose.onclick = resetModal;
+formData.onsubmit = sendData;
+btnSave.onclick = sendData;

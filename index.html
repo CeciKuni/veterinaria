@@ -60,13 +60,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 id="exampleModalLabel" class="modal-title">Nueva Mascota</h5>
-                            <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal"></button>
+                            <button id="icon-close" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                             <form id="formData">
-                                <input type="hidden" id="indice">
+                                <input id="modalIndex" type="hidden">
                                 <div class="form-row">
-                                    <select id="tipo" class="form-select" aria-label="Default select example">
+                                    <select id="petType" class="form-select" aria-label="Default select example">
                                         <option selected>Tipo de Animal</option>
                                         <option>Perro</option>
                                         <option>Gato</option>
@@ -76,12 +76,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input id="nombre" type="text" class="form-control" placeholder="Nombre"
+                                        <input id="petName" type="text" class="form-control" placeholder="Nombre"
                                             aria-label="Nombre">
                                     </div>
                                     <div class="col">
-                                        <select id="dueno" class="form-select" aria-label="Default select example">
-                                            <option selected>Dueño</option>
+                                        <select id="client" class="form-select" aria-label="Default select example">
+                                            <option selected>Cliente</option>
                                             <option>Manuel</option>
                                             <option>Luciana</option>
                                             <option>Jaimito</option>
@@ -94,9 +94,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                id="btn-cerrar">Cerrar</button>
+                                id="btn-close">Cerrar</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                id="btn-guardar">Guardar</button>
+                                id="btn-save">Guardar</button>
                         </div>
 
                     </div>
@@ -115,7 +115,7 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody id="lista-mascotas">
+            <tbody id="pet-list">
                 <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
