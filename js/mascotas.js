@@ -3,7 +3,7 @@ const petType = document.getElementById("petType");
 const petName = document.getElementById("petName");
 const client = document.getElementById("client");
 const formData = document.getElementById("formData");
-const btnSave = document.getElementById("btn-save");
+const btnCreate = document.getElementById("btn-create");
 const btnClose = document.getElementById("btn-close");
 const iconClose = document.getElementById("icon-close");
 const index = document.getElementById("modalIndex");
@@ -18,10 +18,11 @@ var pets = [
   {
     petType: "Perro",
     petName: "Firulais",
-    client: "Ricardo",
+    client: "Luciana",
   },
 ];
 
+//Función listar mascotas
 function listPets() {
   const htmlPets = pets
     .map(
@@ -45,6 +46,7 @@ function listPets() {
   Array.from(document.getElementsByClassName('delete')).forEach((deleteButton, index) => deleteButton.onclick = deletePet(index));
 }
 
+//Función Crear
 function sendData(event) {
   event.preventDefault();
   const data = {
@@ -52,9 +54,9 @@ function sendData(event) {
     petName: petName.value,
     client: client.value,
   };
-  const action = btnSave.innerHTML;
+  const action = btnCreate.innerHTML;
   switch (action) {
-    case "Edit":
+    case 'Editar':
       pets[modalIndex.value] = data;
       break;
     default:
@@ -66,16 +68,17 @@ function sendData(event) {
   resetModal();
 }
 
+//Función Editar
 function edit(index) {
   let scopeFocus = document.getElementById('buttonNew')
   scopeFocus.addEventListener("click",() => {
     resetModal();
   });
-  return function cuandoCliqueo() {
+  return function openModal() {
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
       keyboard: false,
       })
-    btnSave.innerHTML = "Editar";
+    btnCreate.innerHTML = "Editar";
     myModal.toggle();
     const pet = pets[index];
     petName.value = pet.petName;
@@ -85,14 +88,16 @@ function edit(index) {
   }
 }
 
+//Función resetear Modal
 function resetModal() {
   petName.value = '';
   client.value = 'Cliente';
   petType.value = 'Tipo de Animal';
   modalIndex.value = '';
-  btnSave.innerHTML = "Guardar";
+  btnCreate.innerHTML = "Crear";
 }
 
+//Función Eliminar
 function deletePet(index) {
   return function deleteData() {
       pets = pets.filter((pet, petIndex)=>petIndex !== index);
@@ -104,4 +109,4 @@ function deletePet(index) {
 listPets();
 
 formData.onsubmit = sendData;
-btnSave.onclick = sendData;
+btnCreate.onclick = sendData;
