@@ -67,6 +67,10 @@ function enviarDatos(evento) {
 }
 
 function editar(index) {
+  let scopeFocus = document.getElementById('buttonNew')
+  scopeFocus.addEventListener("click",() => {
+    resetModal();
+  });
   return function cuandoCliqueo() {
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
       keyboard: false,
